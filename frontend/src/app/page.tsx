@@ -2,12 +2,10 @@
 'use client'
 import Link from 'next/link';
 import { ArrowRight, Brain, BookOpen, Zap, Target, Users, TrendingUp } from 'lucide-react';
-import { vt } from './layout';
+import { fira_sans } from './layout';
 import { useEffect, useState } from 'react';
 export default function HomePage() {
   return (
-    // src/app/page.tsx
-// Replace the entire first div and update colors throughout:
 
 <div className="min-h-screen bg-[#1D1D1D]">
   {/* Navigation */}
@@ -53,7 +51,7 @@ export default function HomePage() {
         </span>
       </h1>
       
-      <p className={` ${vt.className} text-lg sm:text-2xl lg:text-xl text-[#E7D4D7] opacity-80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto`}>
+      <p className={` ${fira_sans.className} text-lg sm:text-2xl lg:text-xl text-[#E7D4D7] opacity-80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto`}>
         SockRat transforms passive learning into active understanding. Using proven study techniques 
         and guided learning, it help you truly master concepts instead of just memorizing them.
       </p>
@@ -69,7 +67,7 @@ export default function HomePage() {
     
       </div>
 
-      <div className={`${vt.className} mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 sm:text-2xl text-[#A67B9E]`}>
+      <div className={`${fira_sans.className} mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 sm:text-2xl text-[#A67B9E]`}>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-[#9B5D79] rounded-full"></div>
           No credit card required
@@ -93,7 +91,7 @@ export default function HomePage() {
         Everything You Need to{' '}
         <span className="text-[#A67B9E]">Learn Effectively</span>
       </h2>
-      <p className={`${vt.className} text-base sm:text-3xl text-[#E7D4D7] opacity-80 max-w-2xl mx-auto`}>
+      <p className={`${fira_sans.className} text-base sm:text-xl text-[#E7D4D7] opacity-80 max-w-2xl mx-auto`}>
         Powerful tools designed around proven learning science principles
       </p>
     </div>
@@ -105,7 +103,7 @@ export default function HomePage() {
           <Brain className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Socratic Tutor</h3>
-        <p className={`${vt.className}  sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className}  sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           Our tutor doesn&apos;t just answer questions, it questions you back. Learn through guided discovery 
           and develop critical thinking skills naturally.
         </p>
@@ -117,7 +115,7 @@ export default function HomePage() {
           <BookOpen className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Smart Note-Taking</h3>
-        <p className={`${vt.className} text-sm sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className} text-sm sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           Create, organize, and connect your notes. The AI automatically finds relevant 
           information from your past notes when you need it.
         </p>
@@ -129,7 +127,7 @@ export default function HomePage() {
           <Zap className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Intelligent Flashcards</h3>
-        <p className={`${vt.className} text-sm sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className} text-sm sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           Auto-generate flashcards from your notes. Spaced repetition algorithm ensures 
           you review at optimal intervals for long-term retention.
         </p>
@@ -141,7 +139,7 @@ export default function HomePage() {
           <Target className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Mind Maps</h3>
-        <p className={`${vt.className} text-sm sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className} text-sm sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           Visualize complex topics as interactive mind maps. See connections between 
           concepts and build a deeper understanding of the material.
         </p>
@@ -153,7 +151,7 @@ export default function HomePage() {
           <TrendingUp className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Progress Tracking</h3>
-        <p className={`${vt.className} text-sm sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className} text-sm sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           Monitor your learning journey with detailed analytics. See what&apos;s working 
           and stay motivated with streaks and achievements.
         </p>
@@ -165,7 +163,7 @@ export default function HomePage() {
           <Users className="w-6 h-6 text-white" />
         </div>
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-[#E7D4D7]">Context-Awareness</h3>
-        <p className={`${vt.className} text-sm sm:text-2xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+        <p className={`${fira_sans.className} text-sm sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
           The tutor remembers your learning journey. It references your notes and past 
           conversations to provide personalized, relevant guidance.
         </p>
@@ -177,8 +175,8 @@ export default function HomePage() {
   <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
     <div className="max-w-4xl mx-auto bg-[#3A3A3A] rounded-3xl p-6 sm:p-12 border border-[#5B4B8A]">
       <div className="text-center mb-12 sm:mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[#E7D4D7]">How SockRat Works</h2>
-        <p className={`${vt.className} text-3xl sm:text-5xl text-[#A67B9E]`}>
+        <h2 className="text-3xl sm:text-5xlxl font-bold mb-4 text-[#E7D4D7]">How SockRat Works</h2>
+        <p className={`${fira_sans.className} text-3xl sm:text-2xl text-[#A67B9E]`}>
           Active learning in three simple steps
         </p>
       </div>
@@ -190,7 +188,7 @@ export default function HomePage() {
           </div>
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2 text-[#E7D4D7]">Ask Questions, Get Questions Back</h3>
-            <p className={`${vt.className} text-3xl sm:text-3xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+            <p className={`${fira_sans.className} text-3xl sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
               Instead of spoon-feeding answers, our  tutor guides you through understanding 
               by asking thought-provoking questions. This Socratic approach builds deeper comprehension.
             </p>
@@ -203,7 +201,7 @@ export default function HomePage() {
           </div>
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2 text-[#E7D4D7]">Build Your Knowledge Base</h3>
-            <p className={`${vt.className} text-3xl sm:text-3xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+            <p className={`${fira_sans.className} text-3xl sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
               Create notes, generate flashcards, and build mind maps. Everything is searchable 
               and interconnected. The AI uses your knowledge base to provide personalized help.
             </p>
@@ -216,7 +214,7 @@ export default function HomePage() {
           </div>
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2 text-[#E7D4D7]">Review and Master</h3>
-            <p className={`${vt.className} text-3xl sm:text-3xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
+            <p className={`${fira_sans.className} text-3xl sm:text-xl text-[#E7D4D7] opacity-70 leading-relaxed`}>
               Use spaced repetition flashcards to commit knowledge to long-term memory. 
               Track your progress and see your understanding deepen over time.
             </p>
@@ -301,7 +299,7 @@ export default function HomePage() {
       </div>
       
       <p className="text-[#A67B9E] text-xs sm:text-sm">
-        © 2024 SockRat. All rights reserved.
+        © 2026 SockRat. All rights reserved.
       </p>
     </div>
   </footer>

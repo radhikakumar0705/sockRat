@@ -5,9 +5,20 @@ import {
   Bitcount_Prop_Single,
   Press_Start_2P,
   VT323,
-  Play
+  Play, 
+  Ubuntu, 
+  Fira_Sans
 } from "next/font/google";
 
+export const fira_sans = Fira_Sans({
+  weight: "400", 
+  subsets: ["latin"]
+})
+
+export const ubuntu = Ubuntu({
+  weight: "400", 
+  subsets: ["latin"]
+})
 export const bitcountDouble = Bitcount_Prop_Double({
   weight: "400",
   subsets: ["latin"],
@@ -34,7 +45,8 @@ export const pressStart = Press_Start_2P({
 export const fonts = {
   bitcountDouble,
   bitcountSingle,
-  pressStart
+  pressStart,
+  ubuntu
 
 };
 
@@ -45,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={pressStart.className}>
+      <body className={ubuntu.className}>
         {children}
       </body>
     </html>
