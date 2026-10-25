@@ -1,7 +1,7 @@
 # sockRat
 
-[![CI](https://github.com/radhikakumar0705/sockrat/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikakumar0705/sockrat/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/radhikakumar0705/sockrat/actions/workflows/codeql.yml/badge.svg)](https://github.com/radhikakumar0705/sockrat/actions/workflows/codeql.yml)
+[![CI](https://github.com/radhikakumar0705/sockRat/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikakumar0705/sockRat/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/radhikakumar0705/sockRat/actions/workflows/codeql.yml/badge.svg)](https://github.com/radhikakumar0705/sockRat/actions/workflows/codeql.yml)
 
 A private AI teaching assistant for programmers. sockRat streams answers from local LLMs (Mistral, Llama
 and others via **Ollama**) or hosted ones (**Groq**), answers questions about your own notes with
@@ -11,6 +11,8 @@ anywhere from a laptop to **Kubernetes**.
 **Stack:** React 18 · TypeScript · Vite · Tailwind CSS · Flask · SQLAlchemy/Alembic · MySQL · ChromaDB ·
 Redis/RQ · Ollama · Docker · Kubernetes (Helm, Kustomize, kind) · Argo CD · cert-manager · Terraform (GKE) ·
 Prometheus/Grafana/OpenTelemetry · GitHub Actions
+
+*Formerly **Mistrally**: old links to `radhikakumar0705/mistrally` redirect here.*
 
 **Docs:** [Design document](docs/design.md) · [Retrieval evaluation](docs/rag-evaluation.md) ·
 [Performance](docs/performance.md) · [Security](SECURITY.md) ·
@@ -65,7 +67,7 @@ The full write-up, with flows, data model, security and trade-offs, is in [docs/
 | Supply chain | Trivy image scans that fail CI on fixable HIGH/CRITICAL CVEs, SPDX SBOMs per image, CodeQL, Dependabot, gitleaks secret scanning, pre-commit hooks |
 | Delivery | Helm chart (generated secrets kept across upgrades, migrations as an upgrade hook, config-checksum rollouts) verified end to end on a kind cluster with ingress-nginx and HTTPS from a cert-manager CA; enforced NetworkPolicies; Argo CD GitOps; Terraform for a private GKE cluster with Dataplane V2 and Workload Identity |
 | Observability | Prometheus metrics (time to first token, generation speed, answer outcomes), Grafana dashboard, JSON logs with request IDs, OpenTelemetry traces |
-| Testing | 117 backend tests (unit, integration, contract, migrations), 22 frontend tests, 8 Playwright end-to-end tests against the Docker stack, a k6 load test, a retrieval quality gate, sandbox limit checks, and two changes built test-first (red commit, then green) |
+| Testing | 117 backend tests (unit, integration, contract, migrations), 23 frontend tests, 8 Playwright end-to-end tests against the Docker stack, a k6 load test, a retrieval quality gate, sandbox limit checks, and two changes built test-first (red commit, then green). CI also lints and renders the Helm chart, validates every manifest with kubeconform, and checks the Terraform, workflows and shell scripts |
 
 ---
 
@@ -99,7 +101,7 @@ Open ports 80 and 443 in the cloud firewall, then run this on the VM:
 
 ```bash
 echo "GROQ_API_KEY=gsk_..." > ~/sockrat.secrets && chmod 600 ~/sockrat.secrets
-curl -fsSL https://raw.githubusercontent.com/radhikakumar0705/sockrat/master/deploy/demo/setup-vm.sh | bash
+curl -fsSL https://raw.githubusercontent.com/radhikakumar0705/sockRat/master/deploy/demo/setup-vm.sh | bash
 ```
 
 [setup-vm.sh](deploy/demo/setup-vm.sh) does the following:
@@ -204,9 +206,9 @@ frontend/
 sandbox/          isolated Python runner
 monitoring/       Prometheus, alert rules, Grafana dashboard
 loadtest/         k6 load test and retrieval profiler
-helm/sockrat/   Helm chart, values for kind and GKE
+helm/sockrat/     Helm chart, values for kind and GKE
 k8s/              Kustomize base, overlays, optional Ollama component
 deploy/           kind cluster + setup script, cert-manager issuers, Argo CD app, Terraform for GKE
 docs/             design.md, rag-evaluation.md, performance.md
-.github/          CI, CodeQL, load-test workflow, Dependabot
+.github/          CI, CodeQL, demo deploy and load-test workflows, Dependabot
 ```
