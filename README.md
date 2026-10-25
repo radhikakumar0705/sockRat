@@ -1,9 +1,9 @@
-# Mistrally
+# sockRat
 
-[![CI](https://github.com/radhikakumar0705/mistrally/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikakumar0705/mistrally/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/radhikakumar0705/mistrally/actions/workflows/codeql.yml/badge.svg)](https://github.com/radhikakumar0705/mistrally/actions/workflows/codeql.yml)
+[![CI](https://github.com/radhikakumar0705/sockRat/actions/workflows/ci.yml/badge.svg)](https://github.com/radhikakumar0705/sockRat/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/radhikakumar0705/sockRat/actions/workflows/codeql.yml/badge.svg)](https://github.com/radhikakumar0705/sockRat/actions/workflows/codeql.yml)
 
-A private AI teaching assistant for programmers. Mistrally streams answers from local LLMs (Mistral, Llama
+A private AI teaching assistant for programmers. sockRat streams answers from local LLMs (Mistral, Llama
 and others via **Ollama**) or hosted ones (**Groq**), answers questions about your own notes with
 **retrieval-augmented generation**, generates quizzes and flashcards, runs Python in a sandbox, and deploys
 anywhere from a laptop to **Kubernetes**.
@@ -11,6 +11,8 @@ anywhere from a laptop to **Kubernetes**.
 **Stack:** React 18 · TypeScript · Vite · Tailwind CSS · Flask · SQLAlchemy/Alembic · MySQL · ChromaDB ·
 Redis/RQ · Ollama · Docker · Kubernetes (Helm, Kustomize, kind) · Argo CD · cert-manager · Terraform (GKE) ·
 Prometheus/Grafana/OpenTelemetry · GitHub Actions
+
+*Formerly **Mistrally**: old links to `radhikakumar0705/mistrally` redirect here.*
 
 **Docs:** [Design document](docs/design.md) · [Retrieval evaluation](docs/rag-evaluation.md) ·
 [Performance](docs/performance.md) · [Security](SECURITY.md) ·
@@ -65,7 +67,7 @@ The full write-up, with flows, data model, security and trade-offs, is in [docs/
 | Supply chain | Trivy image scans that fail CI on fixable HIGH/CRITICAL CVEs, SPDX SBOMs per image, CodeQL, Dependabot, gitleaks secret scanning, pre-commit hooks |
 | Delivery | Helm chart (generated secrets kept across upgrades, migrations as an upgrade hook, config-checksum rollouts) verified end to end on a kind cluster with ingress-nginx and HTTPS from a cert-manager CA; enforced NetworkPolicies; Argo CD GitOps; Terraform for a private GKE cluster with Dataplane V2 and Workload Identity |
 | Observability | Prometheus metrics (time to first token, generation speed, answer outcomes), Grafana dashboard, JSON logs with request IDs, OpenTelemetry traces |
-| Testing | 117 backend tests (unit, integration, contract, migrations), 22 frontend tests, 8 Playwright end-to-end tests against the Docker stack, a k6 load test, a retrieval quality gate, sandbox limit checks, and two changes built test-first (red commit, then green) |
+| Testing | 117 backend tests (unit, integration, contract, migrations), 23 frontend tests, 8 Playwright end-to-end tests against the Docker stack, a k6 load test, a retrieval quality gate, sandbox limit checks, and two changes built test-first (red commit, then green). CI also lints and renders the Helm chart, validates every manifest with kubeconform, and checks the Terraform, workflows and shell scripts |
 
 ---
 
@@ -98,8 +100,8 @@ docker compose -f docker-compose.yml -f docker-compose.tunnel.yml logs tunnel | 
 Open ports 80 and 443 in the cloud firewall, then run this on the VM:
 
 ```bash
-echo "GROQ_API_KEY=gsk_..." > ~/mistrally.secrets && chmod 600 ~/mistrally.secrets
-curl -fsSL https://raw.githubusercontent.com/radhikakumar0705/mistrally/master/deploy/demo/setup-vm.sh | bash
+echo "GROQ_API_KEY=gsk_..." > ~/sockrat.secrets && chmod 600 ~/sockrat.secrets
+curl -fsSL https://raw.githubusercontent.com/radhikakumar0705/sockRat/master/deploy/demo/setup-vm.sh | bash
 ```
 
 [setup-vm.sh](deploy/demo/setup-vm.sh) does the following:
@@ -121,7 +123,7 @@ deploy/kind/setup.sh            # then open https://localhost:8443
 deploy/kind/setup.sh --argocd   # or let Argo CD deploy it from GitHub (GitOps)
 ```
 
-The chart in [helm/mistrally](helm/mistrally) generates its secrets on first install and keeps them across
+The chart in [helm/sockrat](helm/sockrat) generates its secrets on first install and keeps them across
 upgrades, runs database migrations as a hook before every upgrade, and rolls pods when their config
 changes. HTTPS comes from a private CA managed by cert-manager
 ([local-ca.yaml](deploy/cert-manager/local-ca.yaml)); [letsencrypt.yaml](deploy/cert-manager/letsencrypt.yaml)
@@ -147,7 +149,7 @@ It is validated in CI (`fmt`, `validate`) but has not been applied: running it c
 ```bash
 cd deploy/terraform/gke && cp terraform.tfvars.example terraform.tfvars   # set project_id
 terraform init && terraform apply
-helm upgrade --install mistrally helm/mistrally -n mistrally --create-namespace -f helm/mistrally/values-gke.yaml
+helm upgrade --install sockrat helm/sockrat -n sockrat --create-namespace -f helm/sockrat/values-gke.yaml
 ```
 
 ### Kubernetes with Kustomize
@@ -158,7 +160,7 @@ Plain manifests, if you'd rather not use Helm:
 docker compose build
 cp k8s/overlays/local/secrets.env.example k8s/overlays/local/secrets.env   # fill in
 kubectl apply -k k8s/overlays/local
-kubectl -n mistrally port-forward svc/frontend 8090:80
+kubectl -n sockrat port-forward svc/frontend 8090:80
 ```
 
 ### Local development
@@ -184,7 +186,7 @@ End-to-end and load tests run against the Docker stack with a deterministic fake
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build
 cd frontend && npx playwright install chromium && npm run e2e
-docker run --rm -i --network mistrally_default -e BASE_URL=http://frontend:8080 \
+docker run --rm -i --network sockrat_default -e BASE_URL=http://frontend:8080 \
   -v "$PWD/loadtest:/scripts" grafana/k6:0.54.0 run /scripts/chat.js
 ```
 
@@ -204,9 +206,9 @@ frontend/
 sandbox/          isolated Python runner
 monitoring/       Prometheus, alert rules, Grafana dashboard
 loadtest/         k6 load test and retrieval profiler
-helm/mistrally/   Helm chart, values for kind and GKE
+helm/sockrat/     Helm chart, values for kind and GKE
 k8s/              Kustomize base, overlays, optional Ollama component
 deploy/           kind cluster + setup script, cert-manager issuers, Argo CD app, Terraform for GKE
 docs/             design.md, rag-evaluation.md, performance.md
-.github/          CI, CodeQL, load-test workflow, Dependabot
+.github/          CI, CodeQL, demo deploy and load-test workflows, Dependabot
 ```
